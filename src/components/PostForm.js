@@ -1,6 +1,9 @@
 import React ,{useState} from 'react'
+import { connect } from 'react-redux'
+import PropType from 'prop-types'
+import { createPost } from '../actions/postActions'
 
-const PostForm = () => {
+const PostForm = ({createPost}) => {
 
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
@@ -26,7 +29,12 @@ const PostForm = () => {
         setTitle('')
         setBody('')
 
+        // Call in Action
+        createPost(post)
+
     }
+
+
 
 
 
@@ -52,4 +60,8 @@ const PostForm = () => {
     )
 }
 
-export default PostForm
+PostForm.propTypes = {
+    createPost : PropType.func.isRequired
+}
+
+export default connect(null,{createPost})(PostForm)
